@@ -1,7 +1,7 @@
 # ONT-post-run
 dorado demux
 
-Demux ONT data with current version of dorado (v0.6.0)
+Demux ONT data with current version of dorado (v0.6.1)
 
 list of edit in time:
 
@@ -33,7 +33,7 @@ We consider this as the last step in post processing the data before we start pr
 Before starting copy the ONT samplesheet into the working directory
 It will process all data/samples that are within the samplesheet.
 
-frank, 2024-04-05
+frank, 2024-04-26
 
 
 
