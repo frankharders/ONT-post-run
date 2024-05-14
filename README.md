@@ -1,7 +1,7 @@
 # ONT-post-run
 dorado demux
 
-Demux ONT data with current version of dorado (v0.6.1)
+Demux ONT data with current version of dorado (v0.6.2)
 
 list of edit in time:
 
