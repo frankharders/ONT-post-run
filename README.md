@@ -1,13 +1,13 @@
 # ONT-post-run
 dorado demux
 
-Demux ONT data with current version of dorado (v0.6.2)
+Demux ONT data with current version of dorado (v0.7.0)
 
 list of edit in time:
 
 last edit:
 - change folder names for backup raw and polished data
-- depricate porechop start using dorado
+- deprecate porechop start using dorado
 
 Layout of a processed directory:
 
