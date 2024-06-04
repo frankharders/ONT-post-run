@@ -163,7 +163,7 @@ cat "$SHEET" | cut -f7,8 -d',' | sed 1d > samples.txt;
 model="$QUALITY"\@"$MODEL";
 
 GITdir='/data/GIT/';
-dorado="$GITdir"/'dorado-0.7.0-linux-x64/bin/dorado';
+dorado="$GITdir"/'dorado-0.7.1-linux-x64/bin/dorado';
 #porechop="$GITdir"/Porechop/porechop-runner.py;
 NODES=16;
 
@@ -213,7 +213,7 @@ name=$(echo "$LINE" | cut -f2 -d',');
 mkdir -p "$BCreads"/"$name"."$bc"."$FLOWCELL"/;
 
 
-#READSIN=pod5_pass/"$bc"/;
+#READSIN=pod5_pass/"$barc"/;
 READSin=fastq_pass/"$barc"/;
 DEMUXout=temp_demuxed/"$name"."$barc"."$FLOWCELL"/;
 READSout="$BCreads"/"$name"."$barc"."$FLOWCELL".fastq.gz;
@@ -223,7 +223,7 @@ READSTRIMout="$TRIM"/"$name"."$barc"."$FLOWCELL"."$KITNAME".trimmed.fastq.gz;
 kit="$KITNAME"_;
 
 echo -e "Sample $name";
-echo -e "barcode $barcc";
+echo -e "barcode $barc";
 echo -e "kitname = $KITNAME"
 
 
