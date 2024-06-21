@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#dorado version
+
+VERSION='0.7.2';
+
+doradoVersion='dorado-"$VERSION"-linux-x64;
+
 ## all programs installed or downloaded in /data/GIT/ directory for processing
 ## only suitable for running on GridION
 
@@ -48,6 +54,17 @@ ls -liah *.csv;
 
 echo -e "\n\n\n";
 
+echo -e "On which Machine analysis is done";
+echo -e "P2i, Onion";
+
+MACHINE="USER INPUT";
+
+read -p "
+
+Enter 1 for P2i
+Enter 2 for Onion; " MACHINE && [[ "$MACHINE" == [1,2] ]] || exit 1
+
+
 echo -e "input ONT model";
 echo -e "v4.2.0 or v4.3.0";
 
@@ -74,66 +91,53 @@ Enter 1 for PCR barcoding
 Enter 2 for Native barcoding
 Enter 3 for Rapid barcoding: " KITTEMP && [[ "$KITTEMP" == [1,2,3] ]] || exit 1
 
-
 SHEET="USER INPUT4";
 
 read -p "
 
 Type or copy the samplesheet file name for this run: "
 
-
 echo -e "quality selected is $QUALITY";
 echo -e "selected model is $MODELTEMP";
 echo -e "selected barcoding kit is $KITTEMP";
 echo -e "selected samplesheet.csv is $REPLY";
 
+## Use the correct path for dorado
+
+if [ "$MACHINE" == 1 ];then
+	MACHINE='/home/prom/GIT/';
+else
+	MACHINE='/mnt/onion-disk/GIT/';
+fi
+
 ## Quality of sequence run is set here
 
 if [ "$QUALITYTEMP" == 1 ];then
-
-QUALITY='hac';
-
+	QUALITY='hac';
 else
-
-QUALITY='sup';
-
+	QUALITY='sup';
 fi
-
 
 ## The correct model for analyzing the pod output files is selected here
 
 if [ "$MODELTEMP" == 1 ];then
-
-MODEL='v4.2.0';
-
+	MODEL='v4.2.0';
 else
-
-MODEL='v4.3.0';
-
+	MODEL='v4.3.0';
 else 
-
-MODEL='v5.0.0';
-
+	MODEL='v5.0.0';
 fi
 
 ## The correct barcoding kit is selected 
 
 if [ "$KITTEMP" == 1 ];then
-
-KITNAME='EXP-PBC096';
-
+	KITNAME='EXP-PBC096';
 elif [ "$KITTEMP" == 2 ];then
-
-KITNAME='SQK-NBD114-96';
-
+	KITNAME='SQK-NBD114-96';
 elif [ "$KITTEMP" == 3 ];then
-
-KITNAME='SQK-RBK114-96';
-
+	KITNAME='SQK-RBK114-96';
 else 
-
 	echo "wrong kit is selected";
-
 fi
 
 
@@ -153,7 +157,6 @@ cat "$SHEET1" | sed 's/\r$//' > dorado.csv;
 
 SHEET=dorado.csv;
 
-
 FLOWCELL=$(cat "$SHEET" | cut -f1 -d','| sort -u | sed 1d );
 
 echo new "$FLOWCELL";
@@ -167,8 +170,9 @@ cat "$SHEET" | cut -f7,8 -d',' | sed 1d > samples.txt;
 # select and download model to use for post run polishing
 model="$QUALITY"\@"$MODEL";
 
-GITdir='/home/prom/GIT/';
-dorado="$GITdir"/'dorado-0.7.2-linux-x64/bin/dorado';
+GITdir="$MACHINE";
+dorado="$GITdir"/"$doradoVersion"-linux-x64/bin/dorado;
+DUPLEX="$GITdir"/"$doradoVersion"-linux-x64/model;
 #porechop="$GITdir"/Porechop/porechop-runner.py;
 NODES=16;
 
@@ -297,5 +301,3 @@ fi
 rm -rf "$DEMUXED";
 
 exit 1
-
-
