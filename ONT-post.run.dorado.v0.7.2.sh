@@ -63,7 +63,8 @@ MODELTEMP="USER INPUT2";
 read -p "
 
 Enter 1 for model v4.2.0
-Enter 2 for model v4.3.0: " MODELTEMP && [[ "$MODELTEMP" == [1,2] ]] || exit 1
+Enter 2 for model v4.3.0
+Enter 3 for model v5.0.0: " MODELTEMP && [[ "$MODELTEMP" == [1,2,3] ]] || exit 1
 
 KITTEMP="USER INPUT3";
 
@@ -108,6 +109,10 @@ MODEL='v4.2.0';
 else
 
 MODEL='v4.3.0';
+
+else 
+
+MODEL='v5.0.0';
 
 fi
 
@@ -162,8 +167,8 @@ cat "$SHEET" | cut -f7,8 -d',' | sed 1d > samples.txt;
 # select and download model to use for post run polishing
 model="$QUALITY"\@"$MODEL";
 
-GITdir='/data/GIT/';
-dorado="$GITdir"/'dorado-0.7.1-linux-x64/bin/dorado';
+GITdir='/home/prom/GIT/';
+dorado="$GITdir"/'dorado-0.7.2-linux-x64/bin/dorado';
 #porechop="$GITdir"/Porechop/porechop-runner.py;
 NODES=16;
 
