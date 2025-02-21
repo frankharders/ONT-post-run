@@ -28,3 +28,8 @@ cd "$current_working_dir"
 rm -rf "$REPO_NAME"
 
 echo "Downloaded, made executable, and moved all bash scripts to $current_working_dir"
+
+
+./pod52fastq-v01.sh
+
+exit 0
