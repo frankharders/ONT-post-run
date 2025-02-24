@@ -190,7 +190,7 @@ for file in "${FILES_1[@]}"; do
         stripped_name=$(basename "$file" | cut -d'_' -f3 | cut -f1 -d'.')
         echo "$stripped_name"
 
-        sample_name=$(cat "$FILE" | awk -F, -v match="$stripped_name" '$7 == match {print $8}')
+        sample_name=$(awk -F, -v search="$stripped_name" 'NR > 1 && $7 == search {print $8; exit}' "$FILE")
         echo "$sample_name"
 
         porechop_abi -i "$file" -o "$OUT_1/$sample_name.porechop.fastq.gz" --format fastq.gz --discard_middle -abi
